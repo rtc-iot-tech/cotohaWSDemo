@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <title>sample app of M-PIPE video chat</title>
+    <style>
+    output {
+      font-size: 0.75em;
+      font-weight: bold;
+    }
+    #audios {
+      display: flex;
+    }
+    .media-box {
+      width: 240px;
+      border: 1px solid;
+      margin: 1em;
+      padding: 1em;
+    }
+    </style>
+
+    <script type="text/javascript" src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h1>sample app of M-PIPE video chat</h1>
+
+    <h3>status</h3>
+    <div>Your peerid - <span id="local-id">not assigned yet</span></div>
+    <div id="status"></div>
+
+    <p>
+    <form>
+      <button type="submit">start</button>
+    </form>
+    </p>
+
+    <h3>Result</h3>
+
+    <h4>voice recognition</h4>
+    <div>
+      <pre id="recognition-result"></pre>
+    </div>
+
+    <h4>COTOHA - parse </h4>
+    <div>
+      <pre id="cotoha-parse"></pre>
+    </div>
+
+    <h4>COTOHA - emotion</h4>
+    <div>
+      <pre id="cotoha-emotion"></pre>
+    </div>
+  </body>
+  <script src="./libs/app.js"></script>
+</html>

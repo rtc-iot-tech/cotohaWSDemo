@@ -1,0 +1,18 @@
+{
+  "name": "cotohawsdemo",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NTT Communications <skyway@ntt.com> (http://skyway.io)",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^2.3.0",
+    "skyway-m-pipe-sdk": "0.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1"
+  }
+}

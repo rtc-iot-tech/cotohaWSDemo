@@ -1,6 +1,6 @@
 const WS_URL = "wss://ggoijsfbll.execute-api.us-west-2.amazonaws.com/beta"
 const APIKEY = "3a712cac-8d9c-4ea7-b25c-e566473d152e"
-const MPIPE_ENTRYPOINT = "https://userfront.m-pipe.net/cotoha-ws:afbd2aa6-8dbf-4d00-8350-004ac34347ce/"
+const MPIPE_ENTRYPOINT = "https://userfront.m-pipe.net/cotoha-ws:8e3ae7b3-0147-43d2-85a4-47724c10805b/"
 
 $("form").on("submit", async ev => {
   ev.preventDefault()

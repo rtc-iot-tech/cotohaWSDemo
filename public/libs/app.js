@@ -1,10 +1,24 @@
 const WS_URL = "wss://ggoijsfbll.execute-api.us-west-2.amazonaws.com/beta"
-const APIKEY = "3a712cac-8d9c-4ea7-b25c-e566473d152e"
-const MPIPE_ENTRYPOINT = "https://userfront.m-pipe.net/cotoha-ws:8e3ae7b3-0147-43d2-85a4-47724c10805b/"
+// const APIKEY = "3a712cac-8d9c-4ea7-b25c-e566473d152e"
+// const MPIPE_ENTRYPOINT = "https://userfront.m-pipe.net/cotoha-ws:8e3ae7b3-0147-43d2-85a4-47724c10805b/"
+
+const KEY_APIKEY = "cotohaws-apikey"
+  , KEY_ENTRYPOINT = "cotohaws-entrypoint"
+const _apikey = localStorage.getItem(KEY_APIKEY) || ''
+  , _entrypoint = localStorage.getItem(KEY_ENTRYPOINT) || ''
+
+$("input[name=apikey]").val( _apikey )
+$("input[name=enrtypoint]").val( _entrypoint )
 
 $("form").on("submit", async ev => {
   ev.preventDefault()
+  const apikey = $("input[name=apikey]").val()
+    , entrypoint = $("input[name=enrtypoint]").val()
+
   $("form button").attr("disabled", "disabled")
+
+  localStorage.setItem("cotohaws-apikey", apikey)
+  localStorage.setItem("cotohaws-entrypoint", entrypoint)
 
   try {
     updateStatus('Start handling audio device')
@@ -12,7 +26,7 @@ $("form").on("submit", async ev => {
 
     updateStatus('connecting to SkyWay server')
     const peer = new Peer({
-      key: APIKEY, debug: 3
+      key: apikey, debug: 3
     })
 
     peer.on( 'open', async id => {
@@ -21,7 +35,7 @@ $("form").on("submit", async ev => {
       const ws = await startWS(id)
 
       updateStatus('connecting to M-PIPE...')
-      const { peerid, token } = await getMpipePeerid( id )
+      const { peerid, token } = await getMpipePeerid( entrypoint, id )
 
       updateStatus('start establishing WebRTC session with M-PIPE...')
       const call = peer.call( peerid, stream, { metadata: { token } })
@@ -79,13 +93,13 @@ const startWS = roomName => {
   })
 }
 
-const getMpipePeerid = async ( localId ) => {
+const getMpipePeerid = async ( entrypoint, localId ) => {
   const bodyObj = {
     eventParams: {
       clientId: localId
     }
   }
-  const res = await fetch(`${MPIPE_ENTRYPOINT}/session`, {
+  const res = await fetch(`${entrypoint}/session`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify( bodyObj )
